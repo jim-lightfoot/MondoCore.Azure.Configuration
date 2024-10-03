@@ -107,8 +107,6 @@ namespace MondoCore.Azure.Configuration
 
         public bool IsReadOnly => true;
 
-        string IConfiguration.this[string key] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
         public void Add(string key, object value)
         {
             throw new NotSupportedException();
@@ -142,6 +140,12 @@ namespace MondoCore.Azure.Configuration
         #endregion
 
         #region IConfiguration
+
+        string? IConfiguration.this[string key] 
+        { 
+            get => _config[key]; 
+            set => throw new NotSupportedException(); 
+        }
 
         public IConfigurationSection GetSection(string key)
         {

@@ -12,7 +12,7 @@ namespace MondoCore.Azure.Configuration.FunctionalTests
         [TestMethod]
         public void AzureConfiguration_Get()
         {
-            var config = CreateConfig();
+            ISettings config = CreateConfig();
 
             Assert.AreEqual("Chevy",        config.Get("Make"));
             Assert.AreEqual("Corvette" ,    config.Get("Model"));
@@ -23,7 +23,7 @@ namespace MondoCore.Azure.Configuration.FunctionalTests
         [TestMethod]
         public void AzureConfiguration_GetAsDict()
         {
-            var config = CreateConfigAsDict();
+            IDictionary<string, object> config = CreateConfig();
 
             Assert.AreEqual("Chevy",        config["Make"]);
             Assert.AreEqual("Corvette" ,    config["Model"]);
@@ -34,7 +34,7 @@ namespace MondoCore.Azure.Configuration.FunctionalTests
         [TestMethod]
         public void AzureConfiguration_GetAsConfig()
         {
-            var config = CreateConfigAsConfig();
+            IConfiguration config = CreateConfig();
 
             Assert.AreEqual("Chevy",        config["Make"]);
             Assert.AreEqual("Corvette" ,    config["Model"]);
@@ -44,25 +44,11 @@ namespace MondoCore.Azure.Configuration.FunctionalTests
 
         #region Helpers
 
-        private ISettings CreateConfig(string folder = "")
+        private AzureConfiguration CreateConfig(string folder = "")
         { 
             var config = TestConfiguration.Load();
 
-            return new AzureConfiguration(config.ConfigConnectionString);
-        }
-
-        private IDictionary<string, object> CreateConfigAsDict(string folder = "")
-        { 
-            var config = TestConfiguration.Load();
-
-            return new AzureConfiguration(config.ConfigConnectionString);
-        }
-
-        private IConfiguration CreateConfigAsConfig(string folder = "")
-        { 
-            var config = TestConfiguration.Load();
-
-            return new AzureConfiguration(config.ConfigConnectionString);
+            return new AzureConfiguration(config.ConfigConnectionString, config.KeyVaultTenantId, config.KeyVaultClientId, config.KeyVaultClientSecret);
         }
 
         public static class TestConfiguration
