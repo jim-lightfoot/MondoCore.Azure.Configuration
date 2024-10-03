@@ -351,3 +351,4 @@ MigrationBackup/
 
 # Local config files
 localhost.json
+/MondoCore.Azure.Configuration.FunctionalTests/localhost.json
