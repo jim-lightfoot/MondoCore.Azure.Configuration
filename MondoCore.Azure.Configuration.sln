@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MondoCore.Azure.Configuration", "MondoCore.Azure.Configuration\MondoCore.Azure.Configuration.csproj", "{594D85C4-78BE-47FE-8904-628AEE8866D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MondoCore.Azure.Configuration.FunctionalTests", "MondoCore.Azure.Configuration.FunctionalTests\MondoCore.Azure.Configuration.FunctionalTests.csproj", "{3FCBEFBF-E487-4B01-80B2-5C3EB4AE6FC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{594D85C4-78BE-47FE-8904-628AEE8866D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{594D85C4-78BE-47FE-8904-628AEE8866D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{594D85C4-78BE-47FE-8904-628AEE8866D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{594D85C4-78BE-47FE-8904-628AEE8866D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FCBEFBF-E487-4B01-80B2-5C3EB4AE6FC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FCBEFBF-E487-4B01-80B2-5C3EB4AE6FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FCBEFBF-E487-4B01-80B2-5C3EB4AE6FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FCBEFBF-E487-4B01-80B2-5C3EB4AE6FC9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ABD364CB-5CB9-4F2F-869A-15772DC7353F}
+	EndGlobalSection
+EndGlobal
