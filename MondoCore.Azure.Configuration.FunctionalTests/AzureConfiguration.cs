@@ -23,12 +23,28 @@ namespace MondoCore.Azure.Configuration.FunctionalTests
         [TestMethod]
         public void AzureConfiguration_GetAsDict()
         {
-            IDictionary<string, object> config = CreateConfig();
+            IReadOnlyDictionary<string, object> config = CreateConfig();
 
             Assert.AreEqual("Chevy",        config["Make"]);
             Assert.AreEqual("Corvette" ,    config["Model"]);
             Assert.AreEqual("Black",        config["Color"]);
             Assert.AreEqual("1964",         config["Year"]);
+        }
+
+        [TestMethod]
+        public void AzureConfiguration_GetAsDict_TryGetValue_false()
+        {
+            IReadOnlyDictionary<string, object> config = CreateConfig();
+
+            Assert.IsFalse(config.TryGetValue("Makexx", out object val));
+        }
+
+        [TestMethod]
+        public void AzureConfiguration_GetAsDict_TryGetValue_true()
+        {
+            IReadOnlyDictionary<string, object> config = CreateConfig();
+
+            Assert.IsTrue(config.TryGetValue("Make", out object val));
         }
 
         [TestMethod]

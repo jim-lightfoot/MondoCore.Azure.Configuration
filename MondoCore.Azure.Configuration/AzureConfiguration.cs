@@ -12,7 +12,7 @@ namespace MondoCore.Azure.Configuration
     /// <summary>
     /// Access configuration entries in Azure App Configuration
     /// </summary>
-    public class AzureConfiguration : ISettings, IConfiguration, IDictionary<string, object>
+    public class AzureConfiguration : ISettings, IConfiguration, IReadOnlyDictionary<string, object>
     {
         private readonly IConfiguration _config;
 
@@ -65,77 +65,60 @@ namespace MondoCore.Azure.Configuration
 
         public string Get(string key)
         {
-            return _config[key];
-        }
-
-        public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(string key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(KeyValuePair<string, object> item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool TryGetValue(string key, out object value)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
+            return _config[key]!;
         }
 
         #endregion
 
-        #region IDictionary
+        #region IReadOnlyDictionary
 
-        public object this[string key] { get => this.Get(key); set => throw new NotSupportedException(); }
+        public object this[string key] => this.Get(key);
 
-        public ICollection<string> Keys => throw new NotSupportedException();
+        public bool TryGetValue(string key, out object value)
+        {
+            try
+            {
+                value = this.Get(key);
+                return value != null;
+            }
+            catch
+            {
+              #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+                value = null;
+              #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+                return false;
+            }
+        }
 
-        public ICollection<object> Values => throw new NotSupportedException();
+        #region Not Supported
+
+        public IEnumerable<string> Keys => throw new NotSupportedException();
+
+        public IEnumerable<object> Values => throw new NotSupportedException();
 
         public int Count => throw new NotSupportedException();
 
-        public bool IsReadOnly => true;
-
-        public void Add(string key, object value)
+        public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
         {
             throw new NotSupportedException();
         }
 
-        public void Add(KeyValuePair<string, object> item)
+        public bool Remove(string key)
         {
             throw new NotSupportedException();
         }
 
-        public void Clear()
+        public bool Remove(KeyValuePair<string, object> item)
         {
             throw new NotSupportedException();
         }
 
-        public bool Contains(KeyValuePair<string, object> item)
+        IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotSupportedException();
         }
 
-        public bool ContainsKey(string key)
-        {
-            throw new NotSupportedException();
-        }
-
-        public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
-        {
-            throw new NotSupportedException();
-        }
+        #endregion
 
         #endregion
 
@@ -160,8 +143,13 @@ namespace MondoCore.Azure.Configuration
         public IChangeToken GetReloadToken()
         {
             return _config.GetReloadToken();
-        }        
-        
+        }
+
+        public bool ContainsKey(string key)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
